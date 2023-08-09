@@ -1,12 +1,18 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import path from "path";
-import webpack, { ProgressPlugin } from "webpack";
-import { BuildPaths } from "./types/config";
+import webpack, {
+  DefinePlugin,
+  HotModuleReplacementPlugin,
+  ProgressPlugin,
+} from "webpack";
+import { BuildOptions, BuildPaths } from "./types/config";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 export function buildPlugins(
-  path: BuildPaths
+  options: BuildOptions
 ): webpack.WebpackPluginInstance[] {
+  const { path, isDev } = options;
+
   return [
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
@@ -15,6 +21,14 @@ export function buildPlugins(
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:8].css",
       chunkFilename: "css/[name].[contenthash:8].css",
+    }),
+    new DefinePlugin({
+      __IS_DEV__: JSON.stringify(isDev),
+    }),
+
+    new HotModuleReplacementPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
     }),
   ];
 }

@@ -1,0 +1,15 @@
+.navbar {
+  width: 100%;
+  background: var(--invert-color);
+  height: var(--navbar-size-h);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.links_block {
+  margin-left: auto;
+}
+.link {
+  margin-right: 15px;
+  color: var(--invert-primary-color);
+}
