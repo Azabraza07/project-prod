@@ -1,5 +1,4 @@
-import React from "react";
-import "./Loader.scss";
+import './Loader.scss'
 
 const Loader = () => {
   return (
@@ -9,7 +8,7 @@ const Loader = () => {
       <div></div>
       <div></div>
     </div>
-  );
-};
+  )
+}
 
-export default Loader;
+export default Loader

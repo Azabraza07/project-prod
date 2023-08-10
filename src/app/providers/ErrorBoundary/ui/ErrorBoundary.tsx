@@ -1,46 +1,46 @@
-import React, { ErrorInfo, ReactNode, Suspense } from "react";
-import { PageError } from "widgets/PageError";
+import { Component, type ErrorInfo, type ReactNode, Suspense } from 'react'
+import { PageError } from 'widgets/PageError'
 
 interface ErrorBoundaryProps {
-  children: React.ReactNode;
+  children: ReactNode
 }
+
 interface ErrorBoundaryState {
-  hasError: boolean;
+  hasError: boolean
 }
 
-class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false };
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor (props: ErrorBoundaryProps) {
+    super(props)
+    this.state = { hasError: false }
   }
 
-  static getDerivedStateFromError(error: Error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+  static getDerivedStateFromError () {
+    return { hasError: true }
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {}
+  componentDidCatch (error: Error, errorInfo: ErrorInfo) {
+    logErrorToMyService(error, errorInfo)
+  }
 
-  render() {
-    const { hasError } = this.state;
-    const { children } = this.props;
+  render () {
+    const { hasError } = this.state
+    const { children } = this.props
 
     if (hasError) {
       return (
         <Suspense fallback="">
           <PageError />
         </Suspense>
-      );
+      )
     }
 
-    return children;
+    return children
   }
 }
 
-export default ErrorBoundary;
-function logErrorToMyService(error: Error, errorInfo: React.ErrorInfo) {
-  throw new Error("Function not implemented.");
+export default ErrorBoundary
+
+function logErrorToMyService (_error: Error, errorInfo: ErrorInfo) {
+  // Implement your error logging logic here
 }

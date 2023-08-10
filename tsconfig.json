@@ -1,5 +1,8 @@
 {
+  "include": ["src", "./webpack.config.ts"],
+
   "compilerOptions": {
+    "strictNullChecks": true,
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "ESNext",
@@ -10,9 +13,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "baseUrl": "./src"
-    // "paths": {
-    //   "*": ["./src*"]
-    // }
   },
 
   "ts-node": {
